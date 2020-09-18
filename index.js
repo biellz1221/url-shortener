@@ -10,8 +10,8 @@ const app = express();
 
 require('dotenv').config();
 
-const db = monk(process.env.MONGO_URI);
-//const db = monk('mongodb+srv://admin:CavaloFesteiro2020,@cluster0.byqos.gcp.mongodb.net/urls?retryWrites=true&w=majority');
+//const db = monk(process.env.MONGO_URI);
+const db = monk('mongodb+srv://admin:CavaloFesteiro2020,@cluster0.byqos.gcp.mongodb.net/urls?retryWrites=true&w=majority');
 
 const urls = db.get('urls');
 urls.createIndex({ slug: 1 }, { unique: true });
