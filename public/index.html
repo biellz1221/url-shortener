@@ -1,13 +1,38 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encurtador</title>
-</head>
-<body>
-    <center>
-        <h1>Encurtador de URL</h1>
-    </center>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Encurtador</title>
+
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css" />
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<center>
+			<h1 class="is-size-1">Encurtador de URL</h1>
+		</center>
+		<main id="app">
+			<div class="section">
+				<div class="container">
+					<form action="#" @submit.prevent="shorten">
+						<div class="field">
+							<label class="label" for="url">URL</label>
+							<input class="input" name="url" id="url" v-model="url" type="text" />
+						</div>
+						<div class="field">
+							<label class="label" for="slug">Slug</label>
+							<input class="input" name="slug" id="slug" v-model="slug" type="text" />
+						</div>
+						<div class="field"><button class="button is-primary">Encurtar</button></div>
+						<pre class="is-monospace" v-if="created">
+                            {{ created }}
+                        </pre>
+					</form>
+				</div>
+			</div>
+		</main>
+		<script src="https://unpkg.com/vue@2.6.12/dist/vue.min.js"></script>
+		<script src="app.js"></script>
+	</body>
 </html>
