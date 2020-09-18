@@ -1,8 +1,13 @@
-form {
+form, pre, article {
     width: 90%;
     max-width: 450px;
-    margin: 0 auto;
+    margin: 0 auto 30px;
 }
+
 label {
     display: block;
+}
+
+[aria-label='delete'] {
+    display: none;
 }

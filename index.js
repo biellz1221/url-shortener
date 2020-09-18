@@ -10,8 +10,7 @@ const app = express();
 
 require('dotenv').config();
 
-//const db = monk(process.env.MONGO_URI);
-const db = monk('mongodb+srv://admin:CavaloFesteiro2020,@cluster0.byqos.gcp.mongodb.net/urls?retryWrites=true&w=majority');
+const db = monk(process.env.MONGO_URI);
 
 const urls = db.get('urls');
 urls.createIndex({ slug: 1 }, { unique: true });
@@ -100,8 +99,27 @@ app.use((error, req, res, next) => {
 	});
 });
 
-app.get('/url/:id', (req, res) => {
-	//TODO: return info on the URL
+app.get('/url/:id', async (req, res) => {
+	const { id: slug } = req.params;
+	try {
+		const url = await urls.findOne({ slug });
+		if (url) {
+			res.status(200);
+			res.json({
+				ogUrl: url.url,
+				slug: url.slug,
+				clicks: url.clicks,
+			});
+		} else {
+			res.status(500);
+			res.json({
+				message: error.message,
+				stack: process.env.NODE_ENV === 'production' ? 'Nope' : error.stack,
+			});
+		}
+	} catch (e) {
+		res.send(e);
+	}
 });
 
 const port = process.env.PORT || 1337;

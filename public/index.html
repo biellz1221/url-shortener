@@ -10,10 +10,10 @@
 		<link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
 	</head>
 	<body>
-		<center>
-			<h1 class="is-size-1">Encurtador de URL</h1>
-		</center>
 		<main id="app">
+			<center>
+				<h1 class="is-size-1">Encurtador de URL</h1>
+			</center>
 			<div class="section">
 				<div class="container">
 					<form action="#" @submit.prevent="shorten" v-if="formVisible">
@@ -26,10 +26,40 @@
 							<input class="input" name="slug" id="slug" v-model="slug" type="text" placeholder="back portion da url" />
 						</div>
 						<div class="field"><button class="button is-primary">Encurtar</button></div>
-						<pre class="is-monospace" v-if="created">
-                            {{ created }}
-                        </pre>
 					</form>
+					<article class="message is-primary" v-if="created">
+						<div class="message-header">
+							<p>Link Encurtado</p>
+							<button class="delete" aria-label="delete"></button>
+						</div>
+						<div class="message-body">{{ created }}</div>
+					</article>
+				</div>
+			</div>
+			<center>
+				<h1 class="is-size-1">Checador de URL</h1>
+			</center>
+			<div class="section">
+				<div class="container">
+					<form action="#" @submit.prevent="getUrlData" v-if="formVisible">
+						<div class="field">
+							<label class="label" for="slug">Slug</label>
+							<input class="input" name="slug" id="slug" v-model="slugCheck" type="text" placeholder="back portion da url" />
+						</div>
+						<div class="field"><button class="button is-primary">Buscar</button></div>
+					</form>
+
+					<article class="message is-primary" v-if="urlData.url">
+						<div class="message-header">
+							<p>Link Encurtado</p>
+							<button class="delete" aria-label="delete"></button>
+						</div>
+						<div class="message-body">
+							URL: {{ urlData.url }}<br />
+							Slug: {{ urlData.slug }}<br />
+							Clicks: {{ urlData.clicks }}<br />
+						</div>
+					</article>
 				</div>
 			</div>
 		</main>
