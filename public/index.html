@@ -7,6 +7,7 @@
 
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css" />
 		<link rel="stylesheet" href="style.css" />
+		<link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
 	</head>
 	<body>
 		<center>
@@ -15,14 +16,14 @@
 		<main id="app">
 			<div class="section">
 				<div class="container">
-					<form action="#" @submit.prevent="shorten">
+					<form action="#" @submit.prevent="shorten" v-if="formVisible">
 						<div class="field">
 							<label class="label" for="url">URL</label>
-							<input class="input" name="url" id="url" v-model="url" type="text" />
+							<input class="input" name="url" id="url" v-model="url" type="text" required placeholder="URL a ser Encurtada" />
 						</div>
 						<div class="field">
 							<label class="label" for="slug">Slug</label>
-							<input class="input" name="slug" id="slug" v-model="slug" type="text" />
+							<input class="input" name="slug" id="slug" v-model="slug" type="text" placeholder="back portion da url" />
 						</div>
 						<div class="field"><button class="button is-primary">Encurtar</button></div>
 						<pre class="is-monospace" v-if="created">

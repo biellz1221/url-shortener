@@ -10,7 +10,8 @@ const app = express();
 
 require('dotenv').config();
 
-const db = monk('mongodb+srv://admin:CavaloFesteiro2020,@cluster0.byqos.gcp.mongodb.net/urls?retryWrites=true&w=majority');
+const db = monk(process.env.MONGO_URI);
+//const db = monk('mongodb+srv://admin:CavaloFesteiro2020,@cluster0.byqos.gcp.mongodb.net/urls?retryWrites=true&w=majority');
 
 const urls = db.get('urls');
 urls.createIndex({ slug: 1 }, { unique: true });
@@ -44,11 +45,14 @@ app.get('/:id', async (req, res, next) => {
 	try {
 		const url = await urls.findOne({ slug });
 		if (url) {
+			let addClicks = url.clicks + 1;
+			urls.findOneAndUpdate({ slug }, { $set: { clicks: addClicks } });
 			res.redirect(url.url);
+		} else {
+			res.redirect(`/?error=${slug} not found`);
 		}
-		res.redirect(`/?error=${slug} not found`);
 	} catch (e) {
-		res.redirect(`/?error=Link not found`);
+		res.redirect(`/?error=Link not found blerp`);
 	}
 });
 
