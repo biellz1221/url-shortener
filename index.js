@@ -122,6 +122,10 @@ app.get('/url/:id', async (req, res) => {
 	}
 });
 
+app.get('/.well-known/acme-challenge/:content', (req, res) => {
+	res.send('aoc-_jXD1gkunz0IizsrmUzdohwVZJCRKpQRpmg0zfI.QQdfp8P9Tz-c6LmMWYSHxaOO5zBY9ULKuGgzDRVjQ6Y');
+});
+
 const port = process.env.PORT || 1337;
 
 app.listen(port, () => {
